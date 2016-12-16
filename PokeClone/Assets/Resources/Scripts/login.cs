@@ -29,7 +29,7 @@ public class login : MonoBehaviour
 
         if (usuario == "" || senha == "")
         {
-            Debug.Log("preencha todos os dados para conseguir logar");
+            Debug.Log("Preencha todos os dados para conseguir logar");
         }
         else
         {
@@ -40,7 +40,11 @@ public class login : MonoBehaviour
                 PlayerPrefs.SetInt("lembrar", 1);
             }
 
-            WWW www = new WWW(URL + "?nome=" + usuario + "&senha=" + senha);  // conexao com os logins e passa os dados
+            WWWForm form = new WWWForm();
+            form.AddField("nome", usuario);
+            form.AddField("senha", senha);
+
+            WWW www = new WWW(URL, form);  // conexao com os logins e passa os dados
             StartCoroutine(validarLogin(www));
         }     
     }

@@ -21,7 +21,10 @@ public class cadastro : MonoBehaviour
 
         else
         {
-            WWW www = new WWW(URL + "?nome=" + usuario + "&senha=" + senha);
+            WWWForm form = new WWWForm();
+            form.AddField("nome", usuario);
+            form.AddField("senha", senha);
+            WWW www = new WWW(URL, form);
             StartCoroutine(validarCadastro(www));
         }
 
